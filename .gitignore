@@ -2,8 +2,10 @@
 #
 # Get latest from https://github.com/github/gitignore/blob/master/Unity.gitignore
 #
-/[Ll]ibrary/
-/[Tt]emp/
+**/[Ll]ibrary/
+**/[Ll]logs/
+**/[Tt]emp/
+**/obj/
 /[Oo]bj/
 /[Bb]uild/
 /[Bb]uilds/
@@ -42,6 +44,7 @@ ExportedObj/
 *.mdb
 *.opendb
 *.VC.db
+*.vsconfig
 
 # Unity3D generated meta files
 *.pidb.meta
@@ -58,3 +61,7 @@ sysinfo.txt
 # Crashlytics generated file
 crashlytics-build.properties
 
+
+#NativePlugins
+NativePlugins/Assets/Plugins/
+NativePlugins/Assets/Source~/libs/
