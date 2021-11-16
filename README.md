@@ -10,7 +10,7 @@ Quick Steps:
 * NativePluginBuilder window should open, if it's not opened, from main menu go to Plugins->Build.
 * Select desired architectures, for ex., ARMv7 and ARM64
 * Click Build Native Plugins
-* If all good, it should say **Result: Success**, the native plugins should be copied to Assets/Plugins/[abi], and appropriate plugins (like CPU) should be set
+* If all good, it should say **Result: Success**, the native plugins should be copied to Assets/Plugins/[abi], and appropriate plugin settings (like CPU) should be set
 * Select Il2Cpp in Player Settings
 * Pick the desired Android Architectures from Player Settings
 * Build & Run
