@@ -6,6 +6,7 @@ Shows how to compile native c/cpp files into a shared library for different arch
 
 Quick Steps:
 * Install Unity with Android Support (I used 2019.4.32)
+	* Note: Google tools have a limitation that NDK path shouldn't contain any whitespaces. Either install Unity into a path with no whi
 * Open the project 
 * NativePluginBuilder window should open, if it's not opened, from main menu go to Plugins->Build.
 * Select desired architectures, for ex., ARMv7 and ARM64
