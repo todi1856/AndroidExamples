@@ -1,5 +1,5 @@
+#if UNITY_2021_2_OR_NEWER
 using System;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using UnityEditor;
@@ -23,7 +23,7 @@ public class AndroidResUpgraderPostprocessor : IPostGenerateGradleAndroidProject
             return;
 
         var result = EditorUtility.DisplayDialog($"Upgrade {AndroidResPath} folder ? ",
-            $@"Starting Unity 2021.3 {AndroidResPath} folder can no longer be used for copying res files to gradle project, this has to be done either via android plugins or manually.
+            $@"Starting Unity 2021.2 {AndroidResPath} folder can no longer be used for copying res files to gradle project, this has to be done either via android plugins or manually.
 Proceed with upgrade? 
 ('{AndroidResPath}' will be moved into '{AndroidResLegacyPath}')",
             "Yes",
@@ -95,3 +95,4 @@ Restart Editor afterwards.",
         }
     }
 }
+#endif
