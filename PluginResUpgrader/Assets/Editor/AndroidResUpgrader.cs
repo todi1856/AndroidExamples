@@ -3,9 +3,10 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using UnityEditor;
+using UnityEditor.Android;
 using UnityEditor.Callbacks;
 
-public class AndroidResUpgraderPostprocessor
+public class AndroidResUpgraderPostprocessor : IPostGenerateGradleAndroidProject
 {
     static readonly string AskAboutUpgradeResFolders = nameof(AskAboutUpgradeResFolders);
     static readonly string AndroidResPath = "Assets/Plugins/Android/res";
@@ -41,17 +42,15 @@ Proceed with upgrade?",
         UnityEngine.Debug.LogFormat(UnityEngine.LogType.Log, UnityEngine.LogOption.NoStacktrace, null, message);
     }
 
-    [PostProcessBuildAttribute(1)]
-    public static void OnPostprocessBuild(BuildTarget targetPlatform, string pathToBuiltProject)
-    {
-        if (targetPlatform != BuildTarget.Android)
-            return;
+    public int callbackOrder { get { return 0; } }
 
+    public void OnPostGenerateGradleAndroidProject(string path)
+    {
         if (!Directory.Exists(AndroidResLegacyPath))
             return;
 
         RecursiveCopy(new DirectoryInfo(AndroidResLegacyPath),
-            new DirectoryInfo(Path.Combine(pathToBuiltProject, "unityLibrary/src/main/res").Replace("\\", "/")),
+            new DirectoryInfo(Path.Combine(path, "src/main/res").Replace("\\", "/")),
             new[] {".meta"});
     }
 
