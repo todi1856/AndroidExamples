@@ -5,7 +5,6 @@ using System.Linq;
 using UnityEditor;
 using UnityEditor.Android;
 using System.Text;
-using UnityEditor.Experimental.GraphView;
 
 public class AndroidPluginsUpgraderfPostprocessor : IPostGenerateGradleAndroidProject
 {
@@ -64,6 +63,9 @@ Proceed with upgrade?
 
         foreach (var u in UpgradableItems)
         {
+            if (!Directory.Exists(u.Path))
+                continue;
+
             if (Directory.Exists(u.LegacyPath))
             {
                 EditorUtility.DisplayDialog(
