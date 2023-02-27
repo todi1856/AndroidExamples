@@ -5,49 +5,80 @@ using System.Linq;
 using UnityEditor;
 using UnityEditor.Android;
 using System.Text;
+using UnityEditor.Experimental.GraphView;
 
-public class AndroidResUpgraderPostprocessor : IPostGenerateGradleAndroidProject
+public class AndroidPluginsUpgraderfPostprocessor : IPostGenerateGradleAndroidProject
 {
-    static readonly string AskAboutUpgradeResFolders = nameof(AskAboutUpgradeResFolders);
-    static readonly string AndroidResPath = "Assets/Plugins/Android/res";
-    static readonly string AndroidResLegacyDirectory = "res-legacy";
-    static readonly string AndroidResLegacyPath = $"Assets/Plugins/Android/{AndroidResLegacyDirectory}";
+    internal static readonly string PluginsAndroid = "Assets/Plugins/Android";
+    class UpgradableItem
+    {
+        public string Name { get; }
+        public string Path { get; }
+        public string LegacyDirectory { get; }
+        public string LegacyPath { get; }
+        
+        public UpgradableItem(string directory, string legacyDirectory)
+        {
+            Name = directory;
+            Path = $"{PluginsAndroid}/{directory}";
+            LegacyDirectory = legacyDirectory;
+            LegacyPath = $"{PluginsAndroid}/{LegacyDirectory}";
+        }
+    }
+
+    static readonly string AskAboutUpgradeFolders = nameof(AskAboutUpgradeFolders);
+    static readonly UpgradableItem[] UpgradableItems = new [] 
+    {
+        new UpgradableItem("res", "res-legacy"),
+        new UpgradableItem("assets", "assets-legacy")
+    };
 
     [InitializeOnLoadMethod]
     public static void ValidateResFolder()
     {
-        if (!SessionState.GetBool(AskAboutUpgradeResFolders, true))
+        if (!SessionState.GetBool(AskAboutUpgradeFolders, true))
             return;
 
-        if (!Directory.Exists(AndroidResPath))
+        bool upgradableItemsExist = UpgradableItems.Any(s => Directory.Exists(s.Path));
+        if (!upgradableItemsExist)
             return;
 
-        var result = EditorUtility.DisplayDialog($"Upgrade {AndroidResPath} folder ? ",
-            $@"Starting Unity 2021.2 {AndroidResPath} folder can no longer be used for copying res files to gradle project, this has to be done either via android plugins or manually.
+        var ugpradePaths = new StringBuilder();
+        foreach (var u in UpgradableItems)
+        {
+            ugpradePaths.AppendLine($"'{u.Path}' will be moved into '{u.LegacyPath}')");
+        }
+
+        var result = EditorUtility.DisplayDialog($"Upgrade {PluginsAndroid} folder ? ",
+            $@"Starting Unity 2021.2 {PluginsAndroid} folder can no longer be used for copying '{string.Join(", ", UpgradableItems.Select(u => u.Name))}' files to gradle project, this has to be done either via android plugins or manually.
 Proceed with upgrade? 
-('{AndroidResPath}' will be moved into '{AndroidResLegacyPath}')",
+{ugpradePaths}",
             "Yes",
             "No and don't ask again in this Editor session");
 
         if (!result)
         {
-            SessionState.SetBool(AskAboutUpgradeResFolders, false);
+            SessionState.SetBool(AskAboutUpgradeFolders, false);
             return;
         }
 
-        if (Directory.Exists(AndroidResLegacyPath))
+        foreach (var u in UpgradableItems)
         {
-            EditorUtility.DisplayDialog(
-                "Upgrade failed",
-                @$"Cannot upgrade since '{AndroidResLegacyPath}' already exists, delete it.
-or manually merge '{AndroidResPath}' into '{AndroidResLegacyPath}' 
-and delete '{AndroidResPath}'.
+            if (Directory.Exists(u.LegacyPath))
+            {
+                EditorUtility.DisplayDialog(
+                    "Upgrade failed",
+                    @$"Cannot upgrade since '{u.LegacyPath}' already exists, delete it.
+or manually merge '{u.Path}' into '{u.LegacyPath}' 
+and delete '{u.Path}'.
 Restart Editor afterwards.",
-                "Ok");
-            return;
-        }
+                    "Ok");
+                return;
+            }
 
-        AssetDatabase.RenameAsset(AndroidResPath, AndroidResLegacyDirectory);
+
+            AssetDatabase.RenameAsset(u.Path, u.LegacyDirectory);
+        }
     }
 
     public static void Log(string message)
@@ -59,19 +90,22 @@ Restart Editor afterwards.",
 
     public void OnPostGenerateGradleAndroidProject(string path)
     {
-        if (!Directory.Exists(AndroidResLegacyPath))
-            return;
+        foreach (var u in UpgradableItems)
+        {
+            if (!Directory.Exists(u.LegacyPath))
+                continue;
 
-        var destination = Path.Combine(path, "src/main/res").Replace("\\", "/");
-        var log = new StringBuilder();
-        log.AppendLine("Legacy Android res files copying");
-        log.AppendLine($"Copying '{AndroidResLegacyPath}' -> '{destination}':");
-        RecursiveCopy(new DirectoryInfo(AndroidResLegacyPath),
-            new DirectoryInfo(destination),
-            new[] {".meta"},
-            log);
+            var destination = Path.Combine(path, $"src/main/{u.Name}").Replace("\\", "/");
+            var log = new StringBuilder();
+            log.AppendLine("Legacy Android res files copying");
+            log.AppendLine($"Copying '{u.LegacyPath}' -> '{destination}':");
+            RecursiveCopy(new DirectoryInfo(u.LegacyPath),
+                new DirectoryInfo(destination),
+                new[] { ".meta" },
+                log);
 
-        Log(log.ToString());
+            Log(log.ToString());
+        }
     }
 
     private static void RecursiveCopy(DirectoryInfo source, DirectoryInfo target, string[] ignoredExtensions, StringBuilder log)
