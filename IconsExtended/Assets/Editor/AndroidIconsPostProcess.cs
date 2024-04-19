@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -26,6 +25,17 @@ namespace Unity.AndroidIcons
                 return "app_icon";
 
             throw new Exception($"Unknown platform icon kind '{iconKind}'.");
+        }
+
+        Texture2D Resize(Texture2D texture2D, int targetX, int targetY)
+        {
+            var rt = new RenderTexture(targetX, targetY, 0);
+            RenderTexture.active = rt;
+            Graphics.Blit(texture2D, rt);
+            var result = new Texture2D(targetX, targetY, TextureFormat.ARGB32, false);
+            result.ReadPixels(new Rect(0, 0, targetX, targetY), 0, 0);
+            result.Apply();
+            return result;
         }
 
         public void OnPostGenerateGradleAndroidProject(string path)
@@ -72,6 +82,7 @@ namespace Unity.AndroidIcons
                         var strippedPath = iconPath.Substring(rootFolder.Length + 1).Replace("\\", "/");
                         details.AppendLine($"Using texture '{texturePath}' to generate '{strippedPath}' with size {info.OverridenWidth} x {info.OverridenHeight}");
 
+#if UNITY_2023_3_OR_NEWER
                         AndroidIconsInternal.ExportTextureToImageFile(
                             textureToUse,
                             info.OverridenWidth,
@@ -80,6 +91,11 @@ namespace Unity.AndroidIcons
                             true,
                             false,
                             false);
+#else
+                        var newTexture = Resize(textureToUse, info.OverridenWidth, info.OverridenHeight);
+                        File.WriteAllBytes(iconPath, newTexture.EncodeToPNG());
+                        UnityEngine.Object.DestroyImmediate(newTexture);
+#endif
                     }
                 }
             }

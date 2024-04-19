@@ -5,7 +5,7 @@ This project provides utility code which enables you to override Unity's predefi
 ![image](img/icons.png)
 
 Requirements
-* Unity 6 or higher
+* Unity 2021.3 or higher
 
 Quick Steps
 * Copy all AndroidIcons*.cs files from Assets/Editor to your project's Assets/Editor folder
@@ -17,3 +17,4 @@ Quick Steps
 
 **Note:** Be sure to manually validate gradle project folder in 'launcher\src\main\res'.
 **Note:** The intermediate gradle project is stored in < UnityProject >\Library\Bee\Android\Prj folder.
+**Note:** When sizing icons in Unity 2021.3/2022.3 Graphics.Blit function is used, in Unity 6 or higher the native sizing solution is used - the same one which Unity uses for scaling icons.
