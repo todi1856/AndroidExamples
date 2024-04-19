@@ -40,7 +40,7 @@ namespace Unity.AndroidIcons
             var details = new StringBuilder();
             foreach (var kind in kinds)
             {
-                var icons = PlayerSettings.GetPlatformIcons(BuildTargetGroup.Android, kind);
+                var icons = PlayerSettings.GetPlatformIcons(UnityEditor.Build.NamedBuildTarget.Android, kind);
 
                 var lastValidTextures = new Texture2D[MaxTexturesPerIcon];
                 foreach (var icon in icons)
@@ -53,9 +53,9 @@ namespace Unity.AndroidIcons
                     var textures = icon.GetTextures();
                     if (MaxTexturesPerIcon < textures.Length)
                         throw new Exception("MaxTexturesPerIcon is too small increase it");
-                    for (int i = 0; i < textures.Length; i++)
+                    for (int i = 0; i < MaxTexturesPerIcon; i++)
                     {
-                        if (textures[i] != null)
+                        if (i < textures.Length && textures[i] != null)
                             lastValidTextures[i] = textures[i];
 
                         if (lastValidTextures[i] == null)

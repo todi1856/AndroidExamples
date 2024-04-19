@@ -81,10 +81,11 @@ namespace Unity.AndroidIcons
             {
                 using var indent1 = new AutoIndent(1);
                 var kind = m_IconKinds[k];
-                var icons = PlayerSettings.GetPlatformIcons(BuildTargetGroup.Android, kind);
+                var icons = PlayerSettings.GetPlatformIcons(UnityEditor.Build.NamedBuildTarget.Android, kind);
                 m_Folded[k].target = EditorGUILayout.Foldout(m_Folded[k].target, $"{kind} {icons.Length} icons");
                 if (EditorGUILayout.BeginFadeGroup(m_Folded[k].faded))
                 {
+                    bool wasFirstTexture = true;
                     foreach (var icon in icons)
                     {
                         var key = kind.GetKey(icon);
@@ -126,7 +127,10 @@ namespace Unity.AndroidIcons
                         }
                         else
                         {
-                            EditorGUILayout.HelpBox("Texture not set in PlayerSettings", MessageType.Info);
+                            if (wasFirstTexture)
+                                EditorGUILayout.HelpBox("Texture not set in PlayerSettings.", MessageType.Info);
+                            else
+                                EditorGUILayout.HelpBox("Texture not set in PlayerSettings.\nIf above texture is set, it will be used instead.", MessageType.Info);
                         }
                         GUILayout.Space(15);
                         GUILayout.EndVertical();
@@ -134,6 +138,8 @@ namespace Unity.AndroidIcons
 
                         var rc = GUILayoutUtility.GetLastRect();
                         DrawOutline(rc);
+
+                        wasFirstTexture = false;
                     }
                 }
 
