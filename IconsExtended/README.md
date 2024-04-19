@@ -4,6 +4,9 @@ This project provides utility code which enables you to override Unity's predefi
 
 ![image](img/icons.png)
 
+Requirements
+* Unity 6 or higher
+
 Quick Steps
 * Copy all AndroidIcons*.cs files from Assets/Editor to your project's Assets/Editor folder
 * Open your project, there will be a menu Window->Android->Icons
