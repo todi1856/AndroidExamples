@@ -9,6 +9,7 @@ Quick Steps
 * Open your project, there will be a menu Window->Android->Icons
 * Select Override for icon sizes you want to override, and set the new size
 * Produce the build
+* Check the console, it will mention if any of the icon were overriden
 
 
 **Note:** Be sure to manually validate gradle project folder in 'launcher\src\main\res'.

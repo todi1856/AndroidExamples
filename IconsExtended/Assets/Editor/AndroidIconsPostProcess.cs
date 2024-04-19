@@ -86,7 +86,7 @@ namespace Unity.AndroidIcons
 
 
             if (details.Length > 0)
-                Debug.Log($"Overriding textures in '{rootFolder}':\n{details}");
+                Debug.Log($"Overriding icons in '{rootFolder}':\n{details}");
         }
     }
 }
