@@ -6,6 +6,7 @@ extern JavaVM* sJavaVM;
 static JNIEnv* s_JniEnv;
 static std::string s_Result;
 
+
 JNIEnv* GetJNIEnv() {
     if (s_JniEnv != nullptr)
         return s_JniEnv;
@@ -21,12 +22,17 @@ JNIEnv* GetJNIEnv() {
 
 extern "C" const char* GetData() {
     auto randomClass = GetJNIEnv()->FindClass("com/example/MyClass");
-    auto getStringMethod = GetJNIEnv()->GetMethodID(randomClass, "getString", "()Ljava/lang/String;");
-    auto result = (jstring)GetJNIEnv()->CallObjectMethod(nullptr, getStringMethod, 0);
-    const char* strReturn = GetJNIEnv()->GetStringUTFChars(result, 0);
-    s_Result = strReturn;
-    GetJNIEnv()->ReleaseStringUTFChars(result, strReturn);
+    if (randomClass == nullptr) {
+        s_Result = "\"com/example/MyClass not found\"";
+    }
+    else {
+        auto getStringMethod = GetJNIEnv()->GetStaticMethodID(randomClass, "getString",
+            "()Ljava/lang/String;");
+        auto result = (jstring)GetJNIEnv()->CallStaticObjectMethod(randomClass, getStringMethod,
+            nullptr);
+        const char* strReturn = GetJNIEnv()->GetStringUTFChars(result, 0);
+        s_Result = strReturn;
+        GetJNIEnv()->ReleaseStringUTFChars(result, strReturn);
+    }
     return s_Result.c_str();
-
-
 }
