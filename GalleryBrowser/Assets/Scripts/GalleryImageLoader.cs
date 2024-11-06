@@ -3,12 +3,16 @@ using UnityEngine.Android;
 
 public class GalleryImageLoader : MonoBehaviour
 {
+    public void Update()
+    {
+        transform.Rotate((Vector3.forward + Vector3.right) * 0.5f, Time.deltaTime * 40.0f);
+    }
     // Called from Java
     public void ImageDataLoaded()
     {
         var rawData = AndroidApplication.currentActivity.Call<byte[]>("getImageData");
         LoadImageBytes(rawData);
-        AndroidApplication.currentActivity.Call<byte[]>("clearImageData");
+        AndroidApplication.currentActivity.Call("clearImageData");
     }
 
     private void LoadImageBytes(byte[] data)
