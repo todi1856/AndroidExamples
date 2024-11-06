@@ -2,11 +2,9 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Xml.Linq;
-using Unity.Android.Gradle.Manifest;
 using UnityEditor.Android;
 using UnityEngine;
 
-#if DISABLE_PROJECT_FILES_MODIFIER
 class MyCustomBuildProcessor : IPostGenerateGradleAndroidProject
 {
     public int callbackOrder { get { return 0; } }
