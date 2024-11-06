@@ -1,22 +1,21 @@
 using UnityEngine;
+using UnityEngine.Android;
 
 public class GalleryImageLoader : MonoBehaviour
 {
-    void Start()
+    // Called from Java
+    public void ImageDataLoaded()
     {
-
-        var rawData = System.IO.File.ReadAllBytes("D:\\80023389-alone-fir-tree-with-a-root-isolated-on-white.jpg"); //"/data/user/0/com.unity.mynativeapp/files/IMG_20241105_232022.jpg");
-
-        Texture2D tex = new Texture2D(2, 2);
-        tex.LoadRawTextureData(rawData);
-        tex.Apply();
-
-        GetComponent<Renderer>().material.mainTexture = tex;
+        var rawData = AndroidApplication.currentActivity.Call<byte[]>("getImageData");
+        LoadImageBytes(rawData);
+        AndroidApplication.currentActivity.Call<byte[]>("clearImageData");
     }
 
-    // Update is called once per frame
-    void Update()
+    private void LoadImageBytes(byte[] data)
     {
-        
+        var tex = new Texture2D(2, 2);
+        ImageConversion.LoadImage(tex, data, true);
+
+        GetComponent<Renderer>().material.mainTexture = tex;
     }
 }

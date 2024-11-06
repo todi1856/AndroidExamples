@@ -4,8 +4,10 @@
     "com.unity.ide.visualstudio": "2.0.22",
     "com.unity.mobile.android-logcat": "1.4.3",
     "com.unity.modules.androidjni": "1.0.0",
+    "com.unity.modules.imageconversion": "1.0.0",
     "com.unity.modules.imgui": "1.0.0",
     "com.unity.modules.ui": "1.0.0",
-    "com.unity.modules.uielements": "1.0.0"
+    "com.unity.modules.uielements": "1.0.0",
+    "com.unity.modules.unitywebrequest": "1.0.0"
   }
 }
