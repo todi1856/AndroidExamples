@@ -16,6 +16,8 @@ public class NativePluginBuilder : EditorWindow
 
     private string LastResult = string.Empty;
 
+    private string SourceDirectory => Path.GetFullPath(Path.Combine(Application.dataPath, "Source~"));
+
     [MenuItem("Plugins/Show Builder")]
     
     static void Init()
@@ -57,7 +59,7 @@ public class NativePluginBuilder : EditorWindow
 
     void Build()
     {
-        var sourceDirectory = Path.Combine(Application.dataPath, "Source~");
+        var sourceDirectory = SourceDirectory;
         var pluginsDirectory = Path.Combine(Application.dataPath, "Plugins");
 
         AssetDatabase.DeleteAsset("Assets/Plugins");
@@ -75,7 +77,9 @@ public class NativePluginBuilder : EditorWindow
         File.WriteAllText(Path.Combine(sourceDirectory, "Application.mk"), applicationMkContents);
         var ndkBuild = Path.Combine(AndroidExternalToolsSettings.ndkRootPath, "ndk-build");
         if (Application.platform == RuntimePlatform.WindowsEditor)
+        {
             ndkBuild += ".cmd";
+        }
 
         var result = Shell.RunProcess(ndkBuild, $"NDK_PROJECT_PATH=. NDK_APPLICATION_MK=Application.mk", sourceDirectory);
         var output = $"StdOut:\n{result.GetStandardOut()}\nStdErr:\n{result.GetStandardErr()}";
@@ -132,6 +136,15 @@ public class NativePluginBuilder : EditorWindow
         EditorGUILayout.EndHorizontal();
 
         EditorGUILayout.Space();
+        GUILayout.BeginHorizontal();
+        GUILayout.Label($"Source Directory=");
+        GUILayout.TextField(SourceDirectory);
+        GUILayout.EndHorizontal();
+        
+        if (GUILayout.Button("Open Source Directory"))
+        {
+            EditorUtility.RevealInFinder(SourceDirectory);
+        }
         EditorGUI.BeginDisabledGroup(m_SelectedArchitectures.Count == 0);
         if (GUILayout.Button("Build Native Plugins"))
         {
