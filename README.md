@@ -31,3 +31,8 @@ Quick Steps:
      * Unity will copy Assets/Plugins/Android/res into Assets/Plugins/Android/res-legacy
      * Upon building to Android, the script will manually copy contents of Assets/Plugins/Android/res-legacy to <gradle_project>unityLibrary/src/main/res folder.
 
+
+
+| **Name**    | **Description** | **Image** | **Unity Version** |
+| :--- | :--- | :--- | :--- |
+| [Gallery Browser](/Docs/GalleryBrowser.md) | Shows how to access an image from phone's gallery via Android native UI and pass it to Unity.<br>**Note:** Unity view only occupies part of the application window. | ![](Docs/Images/gallery_browser_index.png)  | Unity 6.0
