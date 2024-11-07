@@ -35,4 +35,4 @@ Quick Steps:
 
 | **Name**    | **Description** | **Image** | **Unity Version** |
 | :--- | :--- | :--- | :--- |
-| [Gallery Browser](/Docs/GalleryBrowser.md) | Shows how to access an image from phone's gallery via Android native UI and pass it to Unity.<br>**Note:** Unity view only occupies part of the application window. |  <img src="Docs/Images/gallery_browser_index.png" alt="drawing" width="206" height="400"/>  | Unity 6.0
+| [Gallery Browser](/Docs/GalleryBrowser.md) | Shows how to access an image from phone's gallery via Android native UI and pass it to Unity.<br>**Note:** Unity view only occupies part of the application window. |  <img src="Docs/Images/gallery_browser_index.png" alt="drawing" width="256" height="400"/>  | Unity 6.0
