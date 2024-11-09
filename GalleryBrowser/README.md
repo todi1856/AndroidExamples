@@ -1,6 +1,6 @@
 # Gallery Browser
 
-![](Images/gallery_browser_index.png)
+![](Docs/img/gallery_browser_index.png)
 
 ## Requirements
 
