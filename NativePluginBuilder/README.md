@@ -4,7 +4,7 @@
 
 Shows how to compile native c/cpp files into a shared library (libnative.so) for different architectures using ndk-build and use that native shared library from C# script.
 
-![](Images/native_plugin_builder.png)
+![](Docs/img/native_plugin_builder.png)
 
 ## Requirements
 
