@@ -1,4 +1,8 @@
-# Android Examples
+## Welcome to Android Examples for Unity
+
+My name is Tomas Dirvanauskas and I am part of Unity's Android development team. This repository contains small examples showing how you can extend Unity's Android platform.
+
+## Examples
 
 | **Name**    | **Description** | **Image** | **Unity Version** |
 | :--- | :--- | :--- | :--- |
