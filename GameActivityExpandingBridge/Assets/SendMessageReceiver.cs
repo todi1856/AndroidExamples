@@ -14,13 +14,13 @@ public class SendMessageReceiver : MonoBehaviour
 
         var label = new Label("Tap on screen to trigger C++ -> C# send message.");
         label.style.color = Color.white;
-        label.style.fontSize = 15;
+        label.style.fontSize = 13;
         doc.rootVisualElement.Add(label);
 
         listView = new ListView();
         listView.itemsSource = items;
         listView.style.color = Color.white;
-        listView.style.fontSize = 15;
+        listView.style.fontSize = 13;
         doc.rootVisualElement.Add(listView);
     }
 
