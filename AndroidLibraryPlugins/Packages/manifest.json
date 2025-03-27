@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "com.unity.ide.rider": "3.0.31",
+    "com.unity.ide.visualstudio": "2.0.22",
+    "com.unity.inputsystem": "1.13.1",
+    "com.unity.modules.androidjni": "1.0.0",
+    "com.unity.modules.ui": "1.0.0",
+    "com.unity.modules.uielements": "1.0.0"
+  }
+}
