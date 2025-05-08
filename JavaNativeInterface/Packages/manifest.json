@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "com.unity.ide.rider": "3.0.36",
+    "com.unity.ide.visualstudio": "2.0.23",
+    "com.unity.mobile.android-logcat": "1.4.4",
+    "com.unity.modules.androidjni": "1.0.0",
+    "com.unity.modules.imgui": "1.0.0"
+  }
+}
