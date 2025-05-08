@@ -4,8 +4,8 @@ public class AndroidJavaClassExamples : MonoBehaviour
 {
     public void Start()
     {
-        using var systemClass = new AndroidJavaClass("java.lang.System");
-        var hashCode = systemClass.CallStatic<int>("identityHashCode");
-        Utilities.Log($"java.lang.System.identityHashCode returns {hashCode}");
+        var integerClass = new AndroidJavaClass("java.lang.Integer");
+        int maxValue = integerClass.GetStatic<int>("MAX_VALUE");
+        Utilities.Log("java.lang.Integer.MAX_VALUE: " + maxValue);
     }
 }

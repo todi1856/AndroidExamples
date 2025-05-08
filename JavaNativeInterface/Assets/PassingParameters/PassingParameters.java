@@ -9,7 +9,7 @@ import org.json.JSONException;
 public class PassingParameters
 {
     public void setByte(byte value) {
-        Log.v("Unity", "Java: Got byte value " + value);
+        Utilities.log("Java: Got byte value " + value);
     }
 
     public byte getByte() {
@@ -17,7 +17,7 @@ public class PassingParameters
     }
 
     public void setShort(short value) {
-        Log.v("Unity", "Java: Got short value " + value);
+        Utilities.log("Java: Got short value " + value);
     }
 
     public short getShort() {
@@ -25,7 +25,7 @@ public class PassingParameters
     }
 
     void setInt(int value) {
-        Log.v("Unity", "Java: Got int value " + value);
+        Utilities.log("Java: Got int value " + value);
     }
 
     int getInt() {
@@ -33,7 +33,7 @@ public class PassingParameters
     }
 
     void setLong(long value) {
-        Log.v("Unity", "Java: Got long value " + value);
+        Utilities.log("Java: Got long value " + value);
     }
 
     long getLong() {
@@ -41,7 +41,7 @@ public class PassingParameters
     }
 
     public void setFloat(float value) {
-        Log.v("Unity", "Java: Got float value " + value);
+        Utilities.log("Java: Got float value " + value);
     }
 
     public float getFloat() {
@@ -49,7 +49,7 @@ public class PassingParameters
     }
 
     public void setDouble(double value) {
-        Log.v("Unity", "Java: Got double value " + value);
+        Utilities.log("Java: Got double value " + value);
     }
 
     public double getDouble() {
@@ -57,7 +57,7 @@ public class PassingParameters
     }
 
     public void setBoolean(boolean value) {
-        Log.v("Unity", "Java: Got boolean value " + value);
+        Utilities.log("Java: Got boolean value " + value);
     }
 
     public boolean getBoolean() {
@@ -65,7 +65,7 @@ public class PassingParameters
     }
 
     public void setChar(char value) {
-        Log.v("Unity", "Java: Got char value " + value);
+        Utilities.log("Java: Got char value " + value);
     }
 
     public char getChar() {
@@ -73,7 +73,7 @@ public class PassingParameters
     }
 
     public void setString(String value) {
-        Log.v("Unity", "Java: Got String value " + value);
+        Utilities.log("Java: Got String value " + value);
     }
 
     public String getString() {
@@ -82,8 +82,8 @@ public class PassingParameters
 
     public void setComplexStructure(String json) {
         var value = ComplexStructure.fromJson(json);
-        Log.v("Unity", "Java: Got ComplexStructure value:");
-        Log.v("Unity", " " + value.toString());
+        Utilities.log("Java: Got ComplexStructure value:");
+        Utilities.log(" " + value.toString());
     }
 
     public String getComplexStructure() throws JSONException {
