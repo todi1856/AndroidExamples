@@ -31,15 +31,8 @@ public class Startup : MonoBehaviour
         var opts = new[] { GUILayout.Height(Screen.height), GUILayout.Width(Screen.width) };
         m_ScrollView = GUILayout.BeginScrollView(m_ScrollView, true, true, opts);
         GUILayout.BeginVertical();
-        GUILayout.BeginHorizontal();
         for (int i = 0; i < m_Buttons.Count; i++)
         {
-            if (i > 0 && i % 3 == 0)
-            {
-                GUILayout.EndHorizontal();
-                GUILayout.BeginHorizontal();
-            }
-
             var key = m_Buttons.Keys.ToArray()[i];
             var value = m_Buttons.Values.ToArray()[i];
 
@@ -49,7 +42,6 @@ public class Startup : MonoBehaviour
             }
         }
 
-        GUILayout.EndHorizontal();
         GUILayout.Space(40);
         GUILayout.EndVertical();
         GUILayout.EndScrollView();
