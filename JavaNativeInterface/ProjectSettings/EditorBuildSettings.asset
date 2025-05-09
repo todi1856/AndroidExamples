@@ -5,7 +5,10 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
+  - enabled: 1
+    path: Assets/Startup/Startup.unity
+    guid: 9bda44d7318557a48a97d09ac4529799
+  - enabled: 1
     path: Assets/AndroidJavaClassExamples/AndroidJavaClassExamples.unity
     guid: e3a54154f384c0843a13cf8b4e8fccd7
   - enabled: 1
