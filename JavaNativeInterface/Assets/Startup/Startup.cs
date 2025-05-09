@@ -22,6 +22,7 @@ public class Startup : MonoBehaviour
 
         AddButton("AndroidJavaClass Examples", "AndroidJavaClassExamples");
         AddButton("Set/Get Params to C#/Java", "PassingParameters");
+        AddButton("Kotlin Examples", "KotlinExamples");        
     }
 
     void OnGUI()
