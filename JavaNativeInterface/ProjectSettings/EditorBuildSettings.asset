@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1045 &1
+EditorBuildSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Startup/Startup.unity
+    guid: 9bda44d7318557a48a97d09ac4529799
+  - enabled: 1
+    path: Assets/Examples/AndroidJavaClassExamples/AndroidJavaClassExamples.unity
+    guid: e3a54154f384c0843a13cf8b4e8fccd7
+  - enabled: 1
+    path: Assets/Examples/PassingParameters/PassingParameters.unity
+    guid: adebe0c6c829f6248bd69fd169140156
+  - enabled: 1
+    path: Assets/Examples/KotlinExamples/KotlinExamples.unity
+    guid: d463f1625012e764cae3cbc840bae269
+  m_configObjects: {}
+  m_UseUCBPForAssetBundles: 0
