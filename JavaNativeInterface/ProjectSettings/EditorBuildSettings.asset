@@ -17,5 +17,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Examples/KotlinExamples/KotlinExamples.unity
     guid: d463f1625012e764cae3cbc840bae269
+  - enabled: 1
+    path: Assets/Examples/RegisterNatives/RegisterNatives.unity
+    guid: 21c76a0d4dd0ae94f9467e7d83d1b77e
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0
